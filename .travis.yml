@@ -8,9 +8,12 @@ addons:
 cache:
  directories:
    - "node_modules"
-before_script:
-   - grunt build
+before_install: 
+   - npm install -g grunt-cli
+install: 
+   - npm install
+before_script: 
+  - grunt build
 script:
-
   - npm test
   - sonar-scanner
