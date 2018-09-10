@@ -1,17 +1,17 @@
-<testsuite name="Mocha Tests" tests="19" failures="0" errors="0" skipped="0" timestamp="Sun, 09 Sep 2018 15:39:30 GMT" time="0.325">
+<testsuite name="Mocha Tests" tests="19" failures="0" errors="0" skipped="0" timestamp="Mon, 10 Sep 2018 13:44:24 GMT" time="0.305">
 <testcase classname="fileencrypt forge Test runs" name="calling function without iv, should throw an error" time="0.002"/>
 <testcase classname="fileencrypt forge Test runs" name="calling function without iv, should throw an error" time="0"/>
-<testcase classname="fileencrypt forge Test runs" name="running code, should create a file &#x27;file.enc.txt&#x27;" time="0.001"/>
+<testcase classname="fileencrypt forge Test runs" name="running code, should create a file &#x27;file.enc.txt&#x27;" time="0"/>
 <testcase classname="fileencrypt forge Test runs" name="running code, should create a file &#x27;file.dec.txt&#x27;" time="0"/>
 <testcase classname="fileencrypt forge Test runs" name="decrypted file should be equal to original file" time="0"/>
 <testcase classname="Stringencrypt forge Test runs" name="calling encryptString without iv, should throw an error" time="0"/>
-<testcase classname="Stringencrypt forge Test runs" name="encryptString should return a String" time="0"/>
-<testcase classname="Stringencrypt forge Test runs" name="calling decryptString without iv, should throw an error" time="0.001"/>
-<testcase classname="Stringencrypt forge Test runs" name="decryptString should retrun a String" time="0"/>
-<testcase classname="Stringencrypt forge Test runs" name="decryptString&#x27;s return should be equal to original String" time="0.001"/>
-<testcase classname="Stringencryptasync forge Test runs" name="pubEncryptString should return a String" time="0.008"/>
+<testcase classname="Stringencrypt forge Test runs" name="encryptString should return a String" time="0.001"/>
+<testcase classname="Stringencrypt forge Test runs" name="calling decryptString without iv, should throw an error" time="0"/>
+<testcase classname="Stringencrypt forge Test runs" name="decryptString should retrun a String" time="0.001"/>
+<testcase classname="Stringencrypt forge Test runs" name="decryptString&#x27;s return should be equal to original String" time="0"/>
+<testcase classname="Stringencryptasync forge Test runs" name="pubEncryptString should return a String" time="0.011"/>
 <testcase classname="Stringencryptasync forge Test runs" name="privDecryptString should return a String" time="0.148"/>
-<testcase classname="Stringencryptasync forge Test runs" name="privDecryptString&#x27;s return should be equal to original String" time="0.135"/>
+<testcase classname="Stringencryptasync forge Test runs" name="privDecryptString&#x27;s return should be equal to original String" time="0.133"/>
 <testcase classname="Stringencryptpw forge Test runs" name="calling encryptString without iv, should throw an error" time="0.001"/>
 <testcase classname="Stringencryptpw forge Test runs" name="encryptString should return a String" time="0"/>
 <testcase classname="Stringencryptpw forge Test runs" name="calling decryptString without iv, should throw an error" time="0"/>
