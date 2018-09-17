@@ -75,5 +75,4 @@ const demonstratePasswordBasedSymmetricEncryption = () => {
 
 demonstratePasswordBasedSymmetricEncryption();
 
-demonstratePasswordBasedSymmetricEncryption;
 module.exports = { demonstratePasswordBasedSymmetricEncryption, logger };

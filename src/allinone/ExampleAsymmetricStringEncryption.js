@@ -41,7 +41,6 @@ const demonstrateKeyBasedAsymmetricEncryption = () => {
       .toString("base64");
 
     // decrypt String
-    let toDecrypt = Buffer.from(encrypted, "base64");
     let decrypted = keypair.privateKey
       .decrypt(encrypted, "RSA-OAEP")
       .toString("utf8");

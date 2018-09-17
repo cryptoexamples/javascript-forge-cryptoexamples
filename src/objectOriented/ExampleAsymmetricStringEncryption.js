@@ -8,20 +8,20 @@
  */
 
 var forge = require("node-forge"),
-	winston = require("winston");
+  winston = require("winston");
 
 // to enable Logging, having winston logger installed is required
 const logger = winston.createLogger({
-	format: winston.format.combine(
-		winston.format.splat(),
-		winston.format.simple()
-	),
-	transports: [
-		new winston.transports.Console({
-			format: winston.format.simple(),
-			handleExceptions: true
-		})
-	]
+  format: winston.format.combine(
+    winston.format.splat(),
+    winston.format.simple()
+  ),
+  transports: [
+    new winston.transports.Console({
+      format: winston.format.simple(),
+      handleExceptions: true
+    })
+  ]
 });
 
 /**
@@ -32,10 +32,9 @@ const logger = winston.createLogger({
  * @return {String} encrypted The encrypted String
  */
 const pubEncryptString = (stringToEncrypt, publicKey) => {
-	let toEncrypt = Buffer.from(stringToEncrypt);
-	let encrypted = publicKey.encrypt(stringToEncrypt, "RSA-OAEP");
-	encrypted = forge.util.encode64(encrypted);
-	return encrypted;
+  let encrypted = publicKey.encrypt(stringToEncrypt, "RSA-OAEP");
+  encrypted = forge.util.encode64(encrypted);
+  return encrypted;
 };
 /**
  * A Method to decrypt a String with a Public key. Note that to decrypt the String,
@@ -45,32 +44,32 @@ const pubEncryptString = (stringToEncrypt, publicKey) => {
  * @return {String} decrypted The decrypted String
  */
 const privDecryptString = (stringToDecrypt, privateKey) => {
-	let decrypted = privateKey.decrypt(
-		forge.util.decode64(stringToDecrypt),
-		"RSA-OAEP"
-	);
-	decrypted = decrypted.toString("utf8");
-	return decrypted;
+  let decrypted = privateKey.decrypt(
+    forge.util.decode64(stringToDecrypt),
+    "RSA-OAEP"
+  );
+  decrypted = decrypted.toString("utf8");
+  return decrypted;
 };
 
 // EXAMPLE START
 try {
-	// replace with the actual string
-	let exampleString = "Test Test 123";
-	// generate Keypair, in asynchronous encryption both keys need to be related
-	// and cannot be independently generated keys
-	// keylength adheres to the "ECRYPT-CSA Recommendations" on "www.keylength.com"
-	let keypair = forge.rsa.generateKeyPair({ bits: 3072, e: 0x10001 });
-	// encrypt String
-	let encrypted = pubEncryptString(exampleString, keypair.publicKey);
-	// decrypt String
-	let decrypted = privDecryptString(encrypted, keypair.privateKey);
-	logger.info(
-		"Decrypted String and original String are the same: %s",
-		exampleString.localeCompare(decrypted) === 0 ? "yes" : "no"
-	);
+  // replace with the actual string
+  let exampleString = "Test Test 123";
+  // generate Keypair, in asynchronous encryption both keys need to be related
+  // and cannot be independently generated keys
+  // keylength adheres to the "ECRYPT-CSA Recommendations" on "www.keylength.com"
+  let keypair = forge.rsa.generateKeyPair({ bits: 3072, e: 0x10001 });
+  // encrypt String
+  let encrypted = pubEncryptString(exampleString, keypair.publicKey);
+  // decrypt String
+  let decrypted = privDecryptString(encrypted, keypair.privateKey);
+  logger.info(
+    "Decrypted String and original String are the same: %s",
+    exampleString.localeCompare(decrypted) === 0 ? "yes" : "no"
+  );
 } catch (error) {
-	logger.error(error.message);
+  logger.error(error.message);
 }
 
 // this exports the functions, making them usable in different files by importing them

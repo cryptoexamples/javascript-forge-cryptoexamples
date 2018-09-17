@@ -49,7 +49,6 @@ const encryptString = (stringToEncrypt, key, iv) => {
   cipher.update(forge.util.createBuffer(stringToEncrypt));
   cipher.finish();
   let encrypted = cipher.output;
-  let test = forge.util.encode64(encrypted.data);
   return forge.util.encode64(encrypted.data);
 };
 

@@ -46,7 +46,6 @@ const demonstrateFileEncryption = () => {
     // read file and encrypt/decrypt with an ansynchronous control flow
     let input;
     let encrypted;
-    let decrypted;
     fs.readFile("file.txt", (error, data) => {
       input = data;
 
