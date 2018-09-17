@@ -1,7 +1,7 @@
 import {
   pubEncryptString,
   privDecryptString
-} from "../../trans/objectOriented/stringencryptasync";
+} from "../../trans/objectOriented/ExampleAsymmetricStringEncryption";
 var chai = require("chai"),
   mocha = require("mocha"),
   forge = require("node-forge");

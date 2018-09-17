@@ -6,95 +6,92 @@
  * - derivation of a key from a password
  * - base64 Encoding of byte arrays
  * - Utf8 Encoding of Plaintext
- * - Logging
+ * - Logging of exceptions
  */
 
 var forge = require("node-forge"),
-	fs = require("fs"),
-	winston = require("winston");
+  fs = require("fs"),
+  winston = require("winston");
 
-// to enable Logging, having winston logger installed is required
 const logger = winston.createLogger({
-	format: winston.format.combine(
-		winston.format.splat(),
-		winston.format.simple()
-	),
-	transports: [
-		new winston.transports.Console({
-			format: winston.format.simple(),
-			handleExceptions: true
-		})
-	]
+  format: winston.format.combine(
+    winston.format.splat(),
+    winston.format.simple()
+  ),
+  transports: [
+    new winston.transports.Console({
+      format: winston.format.simple(),
+      handleExceptions: true
+    })
+  ]
 });
 
 const demonstrateFileEncryption = () => {
-	try {
-		// the password used for derviation of a key, assign your password here
-		// if none is assigned a random one is generated
-		let password = null;
-		password === null
-			? (password = forge.random.getBytesSync(48).toString("utf8"))
-			: (password = password);
+  try {
+    // the password used for derviation of a key, assign your password here
+    // if none is assigned a random one is generated
+    let password = null;
+    if (password === null) {
+      password = forge.random.getBytesSync(48).toString("utf8");
+    }
 
-		// create random salt
-		let salt = forge.random.getBytesSync(128);
+    // derive key with password and salt
+    // keylength adheres to the "ECRYPT-CSA Recommendations" on "www.keylength.com"
+    let salt = forge.random.getBytesSync(128);
+    let key = forge.pkcs5.pbkdf2(password, salt, 10000, 32);
 
-		// derive key with password and salt
-		// keylength adheres to the "ECRYPT-CSA Recommendations" on "www.keylength.com"
-		let key = forge.pkcs5.pbkdf2(password, salt, 10000, 32);
+    //create random initialization vector
+    let iv = forge.random.getBytesSync(16);
 
-		// generate a random initialization Vector
-		let iv = forge.random.getBytesSync(16);
+    // read file and encrypt/decrypt with an ansynchronous control flow
+    let input;
+    let encrypted;
+    let decrypted;
+    fs.readFile("file.txt", (error, data) => {
+      input = data;
 
-		// read file and encrypt/decrypt with an ansynchronous control flow
-		let input;
-		let encrypted;
-		let decrypted;
-		fs.readFile("file.txt", (error, data) => {
-			input = data;
-			// ENCRYPT the file
-			let cipher = forge.cipher.createCipher("AES-GCM", key);
-			cipher.start({ iv: iv });
-			// node buffer and forge buffer differ, so the node buffer must be converted to a forge Buffer
-			cipher.update(forge.util.createBuffer(data.toString("binary")));
-			cipher.finish();
-			let tag = cipher.mode.tag;
-			encrypted = forge.util.createBuffer();
-			encrypted.putBuffer(cipher.output);
-			// node buffer and forge buffer differ, so the forge buffer must be converted to a node Buffer
-			encrypted = Buffer.from(encrypted.getBytes(), "binary");
+      // ENCRYPT the file
+      let cipher = forge.cipher.createCipher("AES-GCM", key);
+      cipher.start({ iv: iv });
+      // node buffer and forge buffer differ, so the node buffer must be converted to a forge Buffer
+      cipher.update(forge.util.createBuffer(data.toString("binary")));
+      cipher.finish();
+      let tag = cipher.mode.tag;
+      encrypted = forge.util.createBuffer();
+      encrypted.putBuffer(cipher.output);
+      // node buffer and forge buffer differ, so the forge buffer must be converted to a node Buffer
+      encrypted = Buffer.from(encrypted.getBytes(), "binary");
 
-			// write encrypted file
-			fs.writeFile("file.enc.txt", encrypted, error => {
-				// DECRYPT the file
-				let decipher = forge.cipher.createDecipher("AES-GCM", key);
-				decipher.start({
-					iv: iv,
-					tag: tag
-				});
-				// node buffer and forge buffer differ, so the node buffer must be converted to a forge Buffer
-				decipher.update(
-					forge.util.createBuffer(encrypted.toString("binary"))
-				);
-				decipher.finish();
-				let decrypted = forge.util.createBuffer();
-				decrypted.putBuffer(decipher.output);
-				// node buffer and forge buffer differ, so the forge buffer must be converted to a node Buffer
-				decrypted = Buffer.from(decrypted.getBytes(), "binary");
+      // write encrypted file
+      fs.writeFile("file.enc.txt", encrypted, error => {
+        // DECRYPT the file
+        let decipher = forge.cipher.createDecipher("AES-GCM", key);
+        decipher.start({
+          iv: iv,
+          tag: tag
+        });
+        // node buffer and forge buffer differ, so the node buffer must be converted to a forge Buffer
+        decipher.update(forge.util.createBuffer(encrypted.toString("binary")));
+        decipher.finish();
+        let decrypted = forge.util.createBuffer();
+        decrypted.putBuffer(decipher.output);
+        // node buffer and forge buffer differ, so the forge buffer must be converted to a node Buffer
+        decrypted = Buffer.from(decrypted.getBytes(), "binary");
 
-				// write decrypted file
-				fs.writeFile("file.dec.txt", decrypted, error => {
-					logger.info(
-						"Decrypted file content and original file content are the same: %s",
-						Buffer.compare(input, decrypted) === 0 ? "yes" : "no"
-					);
-				});
-			});
-		});
-	} catch (error) {
-		logger.error(error.message);
-	}
+        fs.writeFile("file.dec.txt", decrypted, error => {
+          logger.info(
+            "Decrypted file content and original file content are the same: %s",
+            Buffer.compare(input, decrypted) === 0 ? "yes" : "no"
+          );
+        });
+      });
+    });
+  } catch (error) {
+    logger.error(error.message);
+  }
 };
 
-// run the exampleFunction
 demonstrateFileEncryption();
+
+// for unit testing purposes
+module.exports = { demonstrateFileEncryption, logger };

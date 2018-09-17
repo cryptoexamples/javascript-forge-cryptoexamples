@@ -1,4 +1,4 @@
-import { hashStrings } from "../../trans/objectOriented/stringhash";
+import { hashStrings } from "../../trans/objectOriented/ExampleHash";
 var chai = require("chai"),
   mocha = require("mocha"),
   forge = require("node-forge");

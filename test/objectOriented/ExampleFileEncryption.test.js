@@ -2,7 +2,7 @@ import {
   deriveKey,
   encryptFile,
   decryptFile
-} from "../../trans/objectOriented/fileencrypt";
+} from "../../trans/objectOriented/ExampleFileEncryption";
 
 var chai = require("chai"),
   mocha = require("mocha"),

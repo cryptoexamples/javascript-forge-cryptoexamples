@@ -8,20 +8,20 @@
  */
 
 var forge = require("node-forge"),
-	winston = require("winston");
+  winston = require("winston");
 
 // to enable Logging, having winston logger installed is required
 const logger = winston.createLogger({
-	format: winston.format.combine(
-		winston.format.splat(),
-		winston.format.simple()
-	),
-	transports: [
-		new winston.transports.Console({
-			format: winston.format.simple(),
-			handleExceptions: true
-		})
-	]
+  format: winston.format.combine(
+    winston.format.splat(),
+    winston.format.simple()
+  ),
+  transports: [
+    new winston.transports.Console({
+      format: winston.format.simple(),
+      handleExceptions: true
+    })
+  ]
 });
 
 /**
@@ -32,13 +32,13 @@ const logger = winston.createLogger({
  * @return {String} encrypted The encrypted String encoded in base64
  */
 const encryptString = (stringToEncrypt, key, iv) => {
-	let cipher = forge.cipher.createCipher("AES-CBC", key);
-	cipher.start({ iv: iv });
-	cipher.update(forge.util.createBuffer(stringToEncrypt));
-	cipher.finish();
-	let encrypted = cipher.output;
-	let test = forge.util.encode64(encrypted.data);
-	return forge.util.encode64(encrypted.data);
+  let cipher = forge.cipher.createCipher("AES-CBC", key);
+  cipher.start({ iv: iv });
+  cipher.update(forge.util.createBuffer(stringToEncrypt));
+  cipher.finish();
+  let encrypted = cipher.output;
+  let test = forge.util.encode64(encrypted.data);
+  return forge.util.encode64(encrypted.data);
 };
 
 /**
@@ -49,14 +49,14 @@ const encryptString = (stringToEncrypt, key, iv) => {
  * @return {String} decrypted The decrypted String encoded in utf8
  */
 const decryptString = (stringToDecrypt, key, iv) => {
-	let decipher = forge.cipher.createDecipher("AES-CBC", key);
-	decipher.start({ iv: iv });
-	decipher.update(
-		forge.util.createBuffer(forge.util.decode64(stringToDecrypt))
-	);
-	decipher.finish();
-	let decrypted = decipher.output;
-	return decrypted.data;
+  let decipher = forge.cipher.createDecipher("AES-CBC", key);
+  decipher.start({ iv: iv });
+  decipher.update(
+    forge.util.createBuffer(forge.util.decode64(stringToDecrypt))
+  );
+  decipher.finish();
+  let decrypted = decipher.output;
+  return decrypted.data;
 };
 
 // EXAMPLE START
@@ -67,7 +67,9 @@ let exampleString = "Secret to the Max";
 // if none is assigned a random one is generated
 // keylength adheres to the "ECRYPT-CSA Recommendations" on "www.keylength.com"
 let key = null;
-key === null ? (key = forge.random.getBytesSync(32)) : (key = key);
+if (key === null) {
+  key = forge.random.getBytesSync(32);
+}
 //create random initialization vector
 let iv = forge.random.getBytesSync(16);
 // encrypt String
@@ -76,8 +78,8 @@ let encrypted = encryptString(exampleString, key, iv);
 let decrypted = decryptString(encrypted, key, iv);
 
 logger.info(
-	"Decrypted String and original String are the same: %s",
-	exampleString.localeCompare(decrypted) === 0 ? "yes" : "no"
+  "Decrypted String and original String are the same: %s",
+  exampleString.localeCompare(decrypted) === 0 ? "yes" : "no"
 );
 
 // this exports the functions, making them usable in different files by importing them

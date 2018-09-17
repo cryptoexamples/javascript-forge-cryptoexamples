@@ -8,12 +8,7 @@ references: [
     # Place a list of references used to create and/or understand this example.
     {
         url: "https://github.com/digitalbazaar/forge",
-        description: "node-forge",
-        url: "https://github.com/winstonjs/winston",
-        description: "Winston",
-        url: "https://babeljs.io/",
-        description: "Babel compiler"
-
+        description: "node-forge"
     }
 ]
 authors: [
@@ -29,22 +24,29 @@ current_reviews: [
 
 ]
 # Indicates when this example was last updated/created. Reviews don't change this.
-last_updated: "2018-08-12"
+last_updated: "2018-09-17"
 tags: [JavaScript, Node.js, node-forge, RSA, Asymmetric, String, Encryption]
 ---
 
 ## Use cases
 
--   Asymmetric encryption
+- All can encrypt a message using the public key, but only the recipient can decrypt it using the private key
+- Encrypt a string using the public key and decrypting it using the private key
 
 ## node version
 
--   8.11.2
+- 8.11.2
 
 ## JavaScript Version
 
--   ECMAScript 6
--   In order to run this code, one hast to build it with an ECMAScript 6 compiler like Babel. see "references".
+- ECMAScript 6 and higher
+- In order to run this code, one hast to build it with an ECMAScript 6 compiler like Babel. see "installation".
+
+## Installation
+
+- [node-forge](https://github.com/digitalbazaar/forge")
+- [Babel](https://babeljs.io/)
+- [Winston logger](https://github.com/winstonjs/winston)
 
 ## Example Code for JavaScript Asymmetric String Encryption using RSA 3072
 

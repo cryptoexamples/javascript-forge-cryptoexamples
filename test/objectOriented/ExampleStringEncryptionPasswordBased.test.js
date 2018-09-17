@@ -1,15 +1,19 @@
 import {
+  deriveKey,
   encryptString,
   decryptString
-} from "../../trans/objectOriented/stringencrypt";
+} from "../../trans/objectOriented/ExampleStringEncryptionPasswordBased";
+
 var chai = require("chai"),
   mocha = require("mocha"),
   forge = require("node-forge");
 
-let testIv = forge.random.getBytesSync(16);
-let testKey = forge.random.getBytesSync(32);
+const testIv = forge.random.getBytesSync(16);
+const testKey = forge.random.getBytesSync(32);
+const testpw = forge.random.getBytesSync(48);
+const testDerivedKey = deriveKey(testpw, 32);
 
-describe("Stringencrypt forge Test runs", function() {
+describe("Stringencryptpw forge Test runs", function() {
   it("calling encryptString without iv, should throw an error", function() {
     chai
       .expect(() => {
@@ -39,7 +43,11 @@ describe("Stringencrypt forge Test runs", function() {
   it("decryptString's return should be equal to original String", function() {
     chai.assert.equal(
       "test",
-      decryptString(encryptString("test", testKey, testIv), testKey, testIv)
+      decryptString(
+        encryptString("test", testDerivedKey, testIv),
+        testDerivedKey,
+        testIv
+      )
     );
   });
 });
