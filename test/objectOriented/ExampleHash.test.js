@@ -1,4 +1,5 @@
-import { hashStrings } from "../../trans/objectOriented/ExampleHash";
+var testee = require("../../src/objectOriented/ExampleHash.js");
+
 var chai = require("chai"),
   mocha = require("mocha"),
   forge = require("node-forge");
@@ -9,7 +10,7 @@ describe("Stringhash forge Test runs", function() {
   it("hashString shoud work with an array", function() {
     chai
       .expect(() => {
-        hashStrings(testArray);
+        testee.hashStrings(testArray);
       })
       .to.not.throw();
   });

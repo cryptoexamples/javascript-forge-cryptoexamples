@@ -1,8 +1,4 @@
-import {
-  deriveKey,
-  encryptFile,
-  decryptFile
-} from "../../trans/objectOriented/ExampleFileEncryption";
+var testee = require("../../src/objectOriented/ExampleFileEncryption.js");
 
 var chai = require("chai"),
   mocha = require("mocha"),
@@ -20,7 +16,7 @@ describe("fileencrypt forge Test runs", function() {
   it("calling function without iv, should throw an error", function() {
     chai
       .expect(() => {
-        encryptFile(testFile, testKey);
+        testee.encryptFile(testFile, testKey);
       })
       .to.throw();
   });
@@ -28,7 +24,7 @@ describe("fileencrypt forge Test runs", function() {
   it("calling function without iv, should throw an error", function() {
     chai
       .expect(() => {
-        decryptFile(testFileEnc, testKey);
+        testee.decryptFile(testFileEnc, testKey);
       })
       .to.throw();
   });
