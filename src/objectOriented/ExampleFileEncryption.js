@@ -98,13 +98,13 @@ try {
   // create random initialization vector
   let iv = forge.random.getBytesSync(16);
   // read file and put content into a node Buffer
-  let input = fs.readFileSync("file.txt");
+  let input = fs.readFileSync("file2.txt");
   // encrypt file content and write encrypted file content to file
   let encrypted = encryptFileContent(input, key, iv);
-  fs.writeFileSync("file.enc.txt", encrypted);
+  fs.writeFileSync("file2.enc.txt", encrypted);
   // decrypt file content and write dercypted file content to file
   let decrypted = decryptFileContent(encrypted, key, iv);
-  fs.writeFileSync("file.dec.txt", decrypted);
+  fs.writeFileSync("file2.dec.txt", decrypted);
 
   logger.info(
     "Decrypted file content and original file content are the same: %s",
