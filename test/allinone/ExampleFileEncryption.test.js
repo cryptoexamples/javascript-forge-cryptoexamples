@@ -10,15 +10,16 @@ chai.use(sinonChai);
 describe("ExampleFileEncryption allInOne crypto Test runs", function() {
   beforeEach(function() {
     sinon.spy(testee.logger, "error");
+    sinon.spy(testee.logger, "info");
   });
 
   afterEach(function() {
     testee.logger.error.restore();
+    testee.logger.info.restore();
   });
 
-  it("logger output should confirm that files are the same", function() {
-    testee.demonstrateFileEncryption();
-    chai.expect(testee.logger.error).to.not.be.called;
-    // chai.assert.include(logger.info.getCall(0).args, "yes");
+  it("logger output should confirm that files are the same", async function() {
+    await testee.demonstrateFileEncryption();
+    chai.assert.include(testee.logger.info.getCall(0).args, "yes");
   });
 });

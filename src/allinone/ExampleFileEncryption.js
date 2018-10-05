@@ -43,48 +43,40 @@ const demonstrateFileEncryption = () => {
     //create random initialization vector
     let iv = forge.random.getBytesSync(16);
 
-    // read file and encrypt/decrypt with an ansynchronous control flow
-    let input;
-    let encrypted;
-    fs.readFile("file.txt", (error, data) => {
-      input = data;
+    // ENCRYPT the file
+    let input = fs.readFileSync("file.txt");
+    let cipher = forge.cipher.createCipher("AES-GCM", key);
+    cipher.start({ iv: iv });
+    // node buffer and forge buffer differ, so the node buffer must be converted to a forge Buffer
+    cipher.update(forge.util.createBuffer(input.toString("binary")));
+    cipher.finish();
+    let tag = cipher.mode.tag;
+    encrypted = forge.util.createBuffer();
+    encrypted.putBuffer(cipher.output);
+    // node buffer and forge buffer differ, so the forge buffer must be converted to a node Buffer
+    encrypted = Buffer.from(encrypted.getBytes(), "binary");
 
-      // ENCRYPT the file
-      let cipher = forge.cipher.createCipher("AES-GCM", key);
-      cipher.start({ iv: iv });
-      // node buffer and forge buffer differ, so the node buffer must be converted to a forge Buffer
-      cipher.update(forge.util.createBuffer(data.toString("binary")));
-      cipher.finish();
-      let tag = cipher.mode.tag;
-      encrypted = forge.util.createBuffer();
-      encrypted.putBuffer(cipher.output);
-      // node buffer and forge buffer differ, so the forge buffer must be converted to a node Buffer
-      encrypted = Buffer.from(encrypted.getBytes(), "binary");
-
-      // write encrypted file
-      fs.writeFile("file.enc.txt", encrypted, error => {
-        // DECRYPT the file
-        let decipher = forge.cipher.createDecipher("AES-GCM", key);
-        decipher.start({
-          iv: iv,
-          tag: tag
-        });
-        // node buffer and forge buffer differ, so the node buffer must be converted to a forge Buffer
-        decipher.update(forge.util.createBuffer(encrypted.toString("binary")));
-        decipher.finish();
-        let decrypted = forge.util.createBuffer();
-        decrypted.putBuffer(decipher.output);
-        // node buffer and forge buffer differ, so the forge buffer must be converted to a node Buffer
-        decrypted = Buffer.from(decrypted.getBytes(), "binary");
-
-        fs.writeFile("file.dec.txt", decrypted, error => {
-          logger.info(
-            "Decrypted file content and original file content are the same: %s",
-            Buffer.compare(input, decrypted) === 0 ? "yes" : "no"
-          );
-        });
-      });
+    // write encrypted file
+    fs.writeFileSync("file.enc.txt", encrypted);
+    // DECRYPT the file
+    let decipher = forge.cipher.createDecipher("AES-GCM", key);
+    decipher.start({
+      iv: iv,
+      tag: tag
     });
+    // node buffer and forge buffer differ, so the node buffer must be converted to a forge Buffer
+    decipher.update(forge.util.createBuffer(encrypted.toString("binary")));
+    decipher.finish();
+    let decrypted = forge.util.createBuffer();
+    decrypted.putBuffer(decipher.output);
+    // node buffer and forge buffer differ, so the forge buffer must be converted to a node Buffer
+    decrypted = Buffer.from(decrypted.getBytes(), "binary");
+
+    fs.writeFileSync("file.dec.txt", decrypted);
+    logger.info(
+      "Decrypted file content and original file content are the same: %s",
+      Buffer.compare(input, decrypted) === 0 ? "yes" : "no"
+    );
   } catch (error) {
     logger.error(error.message);
   }
