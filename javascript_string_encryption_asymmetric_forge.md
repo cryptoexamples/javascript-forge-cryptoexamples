@@ -51,7 +51,7 @@ tags: [JavaScript, Node.js, node-forge, RSA, Asymmetric, String, Encryption]
 ## Example Code for JavaScript Asymmetric String Encryption using RSA 3072
 
 ```js
-{% include_relative src/allinone/forge/ExampleAsymmetricStringEncryption.js %}
+{% include_relative src/allinone/ExampleAsymmetricStringEncryption.js %}
 ```
 
 {% include links.html %}
