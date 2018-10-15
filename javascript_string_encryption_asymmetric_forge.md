@@ -44,7 +44,6 @@ tags: [JavaScript, Node.js, node-forge, RSA, Asymmetric, String, Encryption]
 ## Installation
 
 - [node-forge](https://github.com/digitalbazaar/forge")
-- [Babel](https://babeljs.io/)
 - [Winston logger](https://github.com/winstonjs/winston)
 
 ## Example Code for JavaScript Asymmetric String Encryption using RSA 3072
