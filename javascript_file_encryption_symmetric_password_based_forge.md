@@ -53,7 +53,7 @@ tags: [JavaScript, Node.js, node-forge, AES, GCM, PBKDF2, Salt, AEAD] A
 ## Example Code for JavaScript Password based symmetric file encryption using AES-GCM and PBKDF2
 
 ```js
-{% include_relative src/allinone/forge/ExampleFileEncryption.js %}
+{% include_relative src/allinone/ExampleFileEncryption.js %}
 ```
 
 {% include links.html %}
