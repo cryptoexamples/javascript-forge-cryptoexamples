@@ -51,7 +51,7 @@ tags: [JavaScript, Node.js, node-forge, AES, GCM, PBKDF2, Salt, AEAD]
 ## Example Code for JavaScript Password Based String Encryption using AES-GCM and PBKDF2
 
 ```js
-{% include_relative src/allinone/forge/ExampleStringEncryptionPasswordBased.js %}
+{% include_relative src/allinone/ExampleStringEncryptionPasswordBased.js %}
 ```
 
 {% include links.html %}
