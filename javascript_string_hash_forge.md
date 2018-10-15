@@ -50,7 +50,7 @@ tags: [JavaScript, Node.js, node-forge hash, SHA, SHA-512]
 ## Example Code for JavaScript String Hashing using SHA-512, BASE64 and UTF-8 encoding
 
 ```js
-{% include_relative src/allinone/forge/ExampleHash.js %}
+{% include_relative src/allinone/ExampleHash.js %}
 ```
 
 {% include links.html %}
