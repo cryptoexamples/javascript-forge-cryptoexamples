@@ -27,7 +27,7 @@ current_reviews: [
 ]
 # Indicates when this example was last updated/created. Reviews don't change this.
 last_updated: "2018-10-15"
-tags: [JavaScript, Node.js, node-forge, AES, GCM, PBKDF2, Salt, AEAD] A
+tags: [JavaScript, Node.js, node-forge, AES, GCM, PBKDF2, Salt, AEAD] 
 ---
 
 ## Use cases
