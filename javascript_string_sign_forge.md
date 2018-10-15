@@ -53,7 +53,7 @@ tags: [JavaScript, Node.js, node-forge, ed25519]
 ## Example Code for JavaScript String Signing using ed25519, BASE64 and UTF-8 encoding
 
 ```js
-{% include_relative src/allinone/forge/ExampleSignature.js %}
+{% include_relative src/allinone/ExampleSignature.js %}
 ```
 
 {% include links.html %}
