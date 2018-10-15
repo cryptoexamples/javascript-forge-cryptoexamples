@@ -42,12 +42,10 @@ tags: [JavaScript, Node.js, node-forge, ed25519]
 ## JavaScript Version
 
 - ECMAScript 6 and higher
-- In order to run this code, one hast to build it with an ECMAScript 6 compiler like Babel. see "installation".
 
 ## Installation
 
 - [node-forge](https://github.com/digitalbazaar/forge")
-- [Babel](https://babeljs.io/)
 - [Winston logger](https://github.com/winstonjs/winston)
 
 ## Example Code for JavaScript String Signing using ed25519, BASE64 and UTF-8 encoding
