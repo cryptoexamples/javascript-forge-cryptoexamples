@@ -27,12 +27,14 @@ current_reviews: [
 
 ]
 # Indicates when this example was last updated/created. Reviews don't change this.
-last_updated: "2018-09-17"
+last_updated: "2018-10-20"
 tags: [JavaScript, Node.js, node-forge, ed25519]
 ---
 
 ## Use cases
 
+- Usable on server side
+- Usable on Client side, if certain node-forge files are built and served to the Browser. See [node-forge](https://github.com/digitalbazaar/forge")
 - verifying if a string has been changed
 
 ## node version

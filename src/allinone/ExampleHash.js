@@ -1,7 +1,6 @@
 /**
  * An example for hashing of a String featuring:
  * - An out of the box working Example
- * - Importable Method/s for hashing
  * - sha-512 digest
  * - Utf8 Encoding of Strings
  * - Base64 String encoding of digest

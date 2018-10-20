@@ -1,7 +1,6 @@
 /**
  * An example for synchronous encryption and decryption of a file featuring:
  * - An out of the box working Example
- * - Importable Methods for encryption/decryption of a file
  * - generation of a random password
  * - derivation of a key from a password
  * - base64 Encoding of byte arrays
@@ -55,9 +54,9 @@ const demonstrateFileEncryption = () => {
     encrypted.putBuffer(cipher.output);
     // node buffer and forge buffer differ, so the forge buffer must be converted to a node Buffer
     encrypted = Buffer.from(encrypted.getBytes(), "binary");
-
     // write encrypted file
     fs.writeFileSync("file.enc.txt", encrypted);
+
     // DECRYPT the file
     let decipher = forge.cipher.createDecipher("AES-GCM", key);
     decipher.start({
@@ -71,7 +70,7 @@ const demonstrateFileEncryption = () => {
     decrypted.putBuffer(decipher.output);
     // node buffer and forge buffer differ, so the forge buffer must be converted to a node Buffer
     decrypted = Buffer.from(decrypted.getBytes(), "binary");
-
+    // write decrypted file
     fs.writeFileSync("file.dec.txt", decrypted);
     logger.info(
       "Decrypted file content and original file content are the same: %s",

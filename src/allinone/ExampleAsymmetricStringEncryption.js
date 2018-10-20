@@ -1,7 +1,6 @@
 /**
  * An example for asynchronous encryption and decryption of a String featuring:
  * - An out of the box working Example
- * - Importable Methods for encryption/decryption
  * - Generation of a RSA 3072 bit keypair
  * - Utf8 Encoding of Strings
  * - Base64 String encoding of byte-Arrays
@@ -34,16 +33,18 @@ const demonstrateKeyBasedAsymmetricEncryption = () => {
     // keylength adheres to the "ECRYPT-CSA Recommendations" on "www.keylength.com"
     let keypair = forge.rsa.generateKeyPair({ bits: 3072, e: 0x10001 });
 
-    // encrypt String
+    // ENCRYPT String
     let toEncrypt = Buffer.from(exampleString);
-    let encrypted = keypair.publicKey
-      .encrypt(toEncrypt, "RSA-OAEP")
-      .toString("base64");
+    let encrypted = forge.util.encode64(
+      keypair.publicKey.encrypt(toEncrypt, "RSA-OAEP")
+    );
 
-    // decrypt String
-    let decrypted = keypair.privateKey
-      .decrypt(encrypted, "RSA-OAEP")
-      .toString("utf8");
+    // DECRYPT String
+    let decrypted = keypair.privateKey.decrypt(
+      forge.util.decode64(encrypted),
+      "RSA-OAEP"
+    );
+
     logger.info(
       "Decrypted String and original String are the same: %s",
       exampleString.localeCompare(decrypted) === 0 ? "yes" : "no"

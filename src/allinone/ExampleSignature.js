@@ -1,7 +1,6 @@
 /**
  * An example for signing of a String featuring:
  * - An out of the box working Example
- * - Importable Method/s for signing and verifying
  * - RSA key generation
  * - sha-512 digest and RSA encryption
  * - Utf8 Encoding of Strings
@@ -27,29 +26,39 @@ const logger = winston.createLogger({
 
 const demonstrateSignature = () => {
   try {
-    // replace with your actual Strings
+    // replace with your actual String
     let exampleString =
       "Text that should be signed to prevent unknown tampering with its content.";
 
-    // generate a random ED25519 keypair
-    let ed25519 = forge.pki.ed25519;
-    let keypair = ed25519.generateKeyPair();
+    // generate a keypair, in asynchronous encryption both keys need to be related
+    // and cannot be independently generated keys
+    // keylength adheres to the "ECRYPT-CSA Recommendations" on "www.keylength.com"
+    // not needed if you already posses public and private key
+    let keypair = forge.pki.rsa.generateKeyPair({ bits: 3072, e: 0x10001 });
 
-    // sign the string
-    let signature = ed25519
-      .sign({
-        message: exampleString,
-        encoding: "utf8",
-        privateKey: keypair["privateKey"]
-      })
-      .toString("base64");
-    // verify the String
-    let verified = ed25519.verify({
-      message: exampleString,
-      encoding: "utf8",
-      signature: Buffer.from(signature, "base64"),
-      publicKey: keypair["publicKey"]
+    // SIGN the string
+    let pss = forge.pss.create({
+      md: forge.md.sha512.create(),
+      mgf: forge.mgf.mgf1.create(forge.md.sha512.create()),
+      saltLength: 20
     });
+    let md = forge.md.sha512.create();
+    md.update(exampleString, "utf8");
+    let signature = forge.util.encode64(keypair["privateKey"].sign(md, pss));
+
+    // VERIFY the String
+    pss = forge.pss.create({
+      md: forge.md.sha512.create(),
+      mgf: forge.mgf.mgf1.create(forge.md.sha512.create()),
+      saltLength: 20
+    });
+    md = forge.md.sha512.create();
+    md.update(exampleString, "utf8");
+    let verified = keypair["publicKey"].verify(
+      md.digest().getBytes(),
+      forge.util.decode64(signature),
+      pss
+    );
 
     logger.info("is signature ok?: %s", verified);
   } catch (error) {

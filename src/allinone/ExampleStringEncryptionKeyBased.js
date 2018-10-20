@@ -1,7 +1,6 @@
 /**
  * An example for synchronous encryption and decryption of a String featuring:
  * - An out of the box working Example
- * - Importable Methods for encryption/decryption
  * - Generation of a random Key
  * - Utf8 Encoding of Strings
  * - Base64 String encoding of byte-Arrays
@@ -38,21 +37,21 @@ const demonstrateKeyBasedSymmetricEncryption = () => {
     //create random initialization vector
     let iv = forge.random.getBytesSync(16);
 
-    // encrypt the text
+    // ENCRYPT the text
     let cipher = forge.cipher.createCipher("AES-GCM", key);
     cipher.start({ iv: iv });
     cipher.update(forge.util.createBuffer(exampleString));
     cipher.finish();
     let tag = cipher.mode.tag;
-    let encrypted = cipher.output;
+    let encrypted = forge.util.encode64(cipher.output.data);
 
-    // decrypt the text
+    // DECRYPT the text
     let decipher = forge.cipher.createDecipher("AES-GCM", key);
     decipher.start({
       iv: iv,
       tag: tag
     });
-    decipher.update(encrypted);
+    decipher.update(forge.util.createBuffer(forge.util.decode64(encrypted)));
     decipher.finish();
     let decrypted = decipher.output;
     logger.info(
