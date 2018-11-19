@@ -1,14 +1,17 @@
 ---
-title: JavaScript Asymmetric String Encryption using "node-forge"
+title: JavaScript String Signing using "node-forge"
 keywords: sample
-summary: "Asymmetric String Encryption in JavaScript"
-permalink: javascript_asymmetric_string_encryption.html
+summary: "JavaScript based string signing"
+permalink: javascript_forge_string_sign.html
 folder: JavaScript Forge
 references: [
     # Place a list of references used to create and/or understand this example.
     {
+       
         url: "https://github.com/digitalbazaar/forge",
         description: "node-forge"
+       
+    
     }
 ]
 authors: [
@@ -25,15 +28,14 @@ current_reviews: [
 ]
 # Indicates when this example was last updated/created. Reviews don't change this.
 last_updated: "2018-10-20"
-tags: [JavaScript, Node.js, node-forge, RSA, Asymmetric, String, Encryption]
+tags: [JavaScript, Node.js, node-forge, ed25519]
 ---
 
 ## Use cases
 
 - Usable on server side
 - Usable on Client side, if certain node-forge files are built and served to the Browser. See [node-forge](https://github.com/digitalbazaar/forge")
-- All can encrypt a message using the public key, but only the recipient can decrypt it using the private key
-- Encrypt a string using the public key and decrypting it using the private key
+- verifying if a string has been changed
 
 ## node version
 
@@ -48,10 +50,10 @@ tags: [JavaScript, Node.js, node-forge, RSA, Asymmetric, String, Encryption]
 - [node-forge](https://github.com/digitalbazaar/forge")
 - [Winston logger](https://github.com/winstonjs/winston)
 
-## Example Code for JavaScript Asymmetric String Encryption using RSA 3072
+## Example Code for JavaScript String Signing using ed25519, BASE64 and UTF-8 encoding
 
 ```js
-{% include_relative src/allinone/ExampleAsymmetricStringEncryption.js %}
+{% include_relative src/allinone/ExampleSignature.js %}
 ```
 
 {% include links.html %}

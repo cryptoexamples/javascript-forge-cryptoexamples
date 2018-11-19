@@ -1,8 +1,8 @@
 ---
-title: JavaScript String Hashing using "node-forge"
+title: JavaScript Password Based String Encryption using "node-forge"
 keywords: sample
-summary: "JavaScript based string hashing"
-permalink: javascript_string_hash.html
+summary: "Password based string encryption in JavaScript"
+permalink: javascript_forge_string_encryption_password_based_symmetric.html
 folder: JavaScript Forge
 references: [
     # Place a list of references used to create and/or understand this example.
@@ -25,14 +25,15 @@ current_reviews: [
 ]
 # Indicates when this example was last updated/created. Reviews don't change this.
 last_updated: "2018-10-20"
-tags: [JavaScript, Node.js, node-forge hash, SHA, SHA-512]
+tags: [JavaScript, Node.js, node-forge, AES, GCM, PBKDF2, Salt, AEAD] 
 ---
 
 ## Use cases
 
 - Usable on server side
 - Usable on Client side, if certain node-forge files are built and served to the Browser. See [node-forge](https://github.com/digitalbazaar/forge")
-- Verifying if a string has been changed
+- Password based encryption of a String
+- Previously shared common secret (password)
 
 ## node version
 
@@ -47,10 +48,10 @@ tags: [JavaScript, Node.js, node-forge hash, SHA, SHA-512]
 - [node-forge](https://github.com/digitalbazaar/forge")
 - [Winston logger](https://github.com/winstonjs/winston)
 
-## Example Code for JavaScript String Hashing using SHA-512, BASE64 and UTF-8 encoding
+## Example Code for JavaScript Password Based String Encryption using AES-GCM and PBKDF2
 
 ```js
-{% include_relative src/allinone/ExampleHash.js %}
+{% include_relative src/allinone/ExampleStringEncryptionPasswordBased.js %}
 ```
 
 {% include links.html %}

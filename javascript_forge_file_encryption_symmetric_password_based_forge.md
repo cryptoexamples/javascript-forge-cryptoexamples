@@ -1,14 +1,16 @@
 ---
-title: JavaScript Password Based String Encryption using "node-forge"
+title: JavaScript Password based symmetric file encryption using "node-forge"
 keywords: sample
-summary: "Password based string encryption in JavaScript"
-permalink: javascript_string_encryption_password_based_symmetric.html
+summary: "Password based symmetric file encryption in JavaScript"
+permalink: javascript_forge_file_encryption_symmetric_password_based.html
 folder: JavaScript Forge
 references: [
     # Place a list of references used to create and/or understand this example.
     {
         url: "https://github.com/digitalbazaar/forge",
-        description: "node-forge"
+        description: "node-forge",
+        url: "https://nodejs.org/api/fs.html",
+        description: "Node.js filesystem"     
     }
 ]
 authors: [
@@ -32,7 +34,7 @@ tags: [JavaScript, Node.js, node-forge, AES, GCM, PBKDF2, Salt, AEAD]
 
 - Usable on server side
 - Usable on Client side, if certain node-forge files are built and served to the Browser. See [node-forge](https://github.com/digitalbazaar/forge")
-- Password based encryption of a String
+- Password based encryption of a file
 - Previously shared common secret (password)
 
 ## node version
@@ -48,10 +50,10 @@ tags: [JavaScript, Node.js, node-forge, AES, GCM, PBKDF2, Salt, AEAD]
 - [node-forge](https://github.com/digitalbazaar/forge")
 - [Winston logger](https://github.com/winstonjs/winston)
 
-## Example Code for JavaScript Password Based String Encryption using AES-GCM and PBKDF2
+## Example Code for JavaScript Password based symmetric file encryption using AES-GCM and PBKDF2
 
 ```js
-{% include_relative src/allinone/ExampleStringEncryptionPasswordBased.js %}
+{% include_relative src/allinone/ExampleFileEncryption.js %}
 ```
 
 {% include links.html %}

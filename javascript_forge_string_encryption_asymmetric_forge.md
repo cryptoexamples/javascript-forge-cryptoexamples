@@ -1,8 +1,8 @@
 ---
-title: Java String Encryption with key generation using "node-forge"
+title: JavaScript Asymmetric String Encryption using "node-forge"
 keywords: sample
-summary: "String encryption in JavaScript with key generation"
-permalink: javascript_string_encryption_key_based_symmetric.html
+summary: "Asymmetric String Encryption in JavaScript"
+permalink: javascript_forge_asymmetric_string_encryption.html
 folder: JavaScript Forge
 references: [
     # Place a list of references used to create and/or understand this example.
@@ -25,15 +25,15 @@ current_reviews: [
 ]
 # Indicates when this example was last updated/created. Reviews don't change this.
 last_updated: "2018-10-20"
-tags: [JavaScript, Node.js, node-forge, AES, GCM, Salt, AEAD] 
+tags: [JavaScript, Node.js, node-forge, RSA, Asymmetric, String, Encryption]
 ---
 
 ## Use cases
 
 - Usable on server side
 - Usable on Client side, if certain node-forge files are built and served to the Browser. See [node-forge](https://github.com/digitalbazaar/forge")
-- Random key generation
-- String encryption
+- All can encrypt a message using the public key, but only the recipient can decrypt it using the private key
+- Encrypt a string using the public key and decrypting it using the private key
 
 ## node version
 
@@ -48,10 +48,10 @@ tags: [JavaScript, Node.js, node-forge, AES, GCM, Salt, AEAD]
 - [node-forge](https://github.com/digitalbazaar/forge")
 - [Winston logger](https://github.com/winstonjs/winston)
 
-## Example Code for JavaScript String Encryption with key generation using AES-GCM
+## Example Code for JavaScript Asymmetric String Encryption using RSA 3072
 
 ```js
-{% include_relative src/allinone/ExampleStringEncryptionKeyBased.js %}
+{% include_relative src/allinone/ExampleAsymmetricStringEncryption.js %}
 ```
 
 {% include links.html %}
