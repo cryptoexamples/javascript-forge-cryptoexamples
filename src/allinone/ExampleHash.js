@@ -1,9 +1,9 @@
 /**
- * An example for hashing of a String featuring:
+ * An example for hashing of Strings featuring:
  * - An out of the box working Example
- * - sha-512 digest
+ * - Sha-512 digest
  * - Utf8 Encoding of Strings
- * - Base64 String encoding of digest
+ * - base64 Encoding of byte arrays
  * - Logging of exceptions
  */
 
@@ -26,17 +26,19 @@ const logger = winston.createLogger({
 const demonstrateHash = () => {
   try {
     // replace with your actual Strings
-    let exampleString =
+    var exampleString =
       "Text that should be authenticated by comparing the hash of it!";
-    let exampleString2 =
+    var exampleString2 =
       "Text that should be authenticated by comparing the hash of it! - 2";
+    exampleString = exampleString.toString("utf8");
+    exampleString2 = exampleString2.toString("utf8");
 
-    let hashObject = forge.md.sha512.create();
+    var hashObject = forge.md.sha512.create();
     //update the hash object with data as often as required
     hashObject.update(exampleString);
     hashObject.update(exampleString2);
 
-    let digest = forge.util.encode64(hashObject.digest().data);
+    var digest = forge.util.encode64(hashObject.digest().data);
 
     logger.info("Digest of the Strings: %s", digest);
   } catch (error) {

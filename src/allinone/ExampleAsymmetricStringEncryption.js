@@ -1,9 +1,10 @@
 /**
  * An example for asynchronous encryption and decryption of a String featuring:
  * - An out of the box working Example
- * - Generation of a RSA 3072 bit keypair
+ * - Generation of a RSA keypair
+ * - RSA encryption and decryption of text using OAEP padding
  * - Utf8 Encoding of Strings
- * - Base64 String encoding of byte-Arrays
+ * - base64 Encoding of byte arrays
  * - Logging of exceptions
  */
 
@@ -26,25 +27,37 @@ const logger = winston.createLogger({
 const demonstrateKeyBasedAsymmetricEncryption = () => {
   try {
     // replace with yout actual String
-    let exampleString =
+    var exampleString =
       "Text that is going to be sent over an insecure channel and must be encrypted at all costs!";
     // generate Keypair, in asynchronous encryption both keys need to be related
     // and cannot be independently generated keys
     // keylength adheres to the "ECRYPT-CSA Recommendations" on "www.keylength.com"
-    let keypair = forge.rsa.generateKeyPair({ bits: 3072, e: 0x10001 });
+    var keypair = forge.rsa.generateKeyPair({ bits: 4096, e: 0x10001 });
+    exampleString = exampleString.toString("utf8");
 
     // ENCRYPT String
-    let toEncrypt = Buffer.from(exampleString);
-    let encrypted = forge.util.encode64(
-      keypair.publicKey.encrypt(toEncrypt, "RSA-OAEP")
+    var toEncrypt = Buffer.from(exampleString);
+    var encrypted = forge.util.encode64(
+      keypair.publicKey.encrypt(toEncrypt, "RSA-OAEP", {
+        md: forge.md.sha256.create(),
+        mgf1: {
+          md: forge.md.sha1.create()
+        }
+      })
     );
 
     // DECRYPT String
-    let decrypted = keypair.privateKey.decrypt(
+    var decrypted = keypair.privateKey.decrypt(
       forge.util.decode64(encrypted),
-      "RSA-OAEP"
+      "RSA-OAEP",
+      {
+        md: forge.md.sha256.create(),
+        mgf1: {
+          md: forge.md.sha1.create()
+        }
+      }
     );
-
+    decrypted = decrypted.toString("utf8");
     logger.info(
       "Decrypted String and original String are the same: %s",
       exampleString.localeCompare(decrypted) === 0 ? "yes" : "no"

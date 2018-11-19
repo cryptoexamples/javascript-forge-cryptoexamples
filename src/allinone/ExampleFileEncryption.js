@@ -1,10 +1,11 @@
 /**
  * An example for synchronous encryption and decryption of a file featuring:
  * - An out of the box working Example
- * - generation of a random password
- * - derivation of a key from a password
- * - base64 Encoding of byte arrays
- * - Utf8 Encoding of Plaintext
+ * - Generation of a random password
+ * - derivation of a key from a password with PBKDF2
+ * - AES-256 encryption using GCM
+ * - Base64 Encoding of byte arrays
+ * - Utf8 Encoding of Strings
  * - Logging of exceptions
  */
 
@@ -29,27 +30,27 @@ const demonstrateFileEncryption = () => {
   try {
     // the password used for derviation of a key, assign your password here
     // if none is assigned a random one is generated
-    let password = null;
+    var password = null;
     if (password === null) {
       password = forge.random.getBytesSync(48).toString("utf8");
     }
 
     // derive key with password and salt
     // keylength adheres to the "ECRYPT-CSA Recommendations" on "www.keylength.com"
-    let salt = forge.random.getBytesSync(128);
-    let key = forge.pkcs5.pbkdf2(password, salt, 10000, 32);
+    var salt = forge.random.getBytesSync(128);
+    var key = forge.pkcs5.pbkdf2(password, salt, 10000, 32);
 
     //create random initialization vector
-    let iv = forge.random.getBytesSync(16);
+    var iv = forge.random.getBytesSync(16);
 
     // ENCRYPT the file
-    let input = fs.readFileSync("file.txt");
-    let cipher = forge.cipher.createCipher("AES-GCM", key);
+    var input = fs.readFileSync("file.txt");
+    var cipher = forge.cipher.createCipher("AES-GCM", key);
     cipher.start({ iv: iv });
     // node buffer and forge buffer differ, so the node buffer must be converted to a forge Buffer
     cipher.update(forge.util.createBuffer(input.toString("binary")));
     cipher.finish();
-    let tag = cipher.mode.tag;
+    var tag = cipher.mode.tag;
     encrypted = forge.util.createBuffer();
     encrypted.putBuffer(cipher.output);
     // node buffer and forge buffer differ, so the forge buffer must be converted to a node Buffer
@@ -58,7 +59,7 @@ const demonstrateFileEncryption = () => {
     fs.writeFileSync("file.enc.txt", encrypted);
 
     // DECRYPT the file
-    let decipher = forge.cipher.createDecipher("AES-GCM", key);
+    var decipher = forge.cipher.createDecipher("AES-GCM", key);
     decipher.start({
       iv: iv,
       tag: tag
@@ -66,7 +67,7 @@ const demonstrateFileEncryption = () => {
     // node buffer and forge buffer differ, so the node buffer must be converted to a forge Buffer
     decipher.update(forge.util.createBuffer(encrypted.toString("binary")));
     decipher.finish();
-    let decrypted = forge.util.createBuffer();
+    var decrypted = forge.util.createBuffer();
     decrypted.putBuffer(decipher.output);
     // node buffer and forge buffer differ, so the forge buffer must be converted to a node Buffer
     decrypted = Buffer.from(decrypted.getBytes(), "binary");
