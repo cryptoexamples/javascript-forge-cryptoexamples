@@ -41,7 +41,7 @@ const demonstrateSignature = () => {
     var pss = forge.pss.create({
       md: forge.md.sha512.create(),
       mgf: forge.mgf.mgf1.create(forge.md.sha512.create()),
-      saltLength: 20
+      saltLength: 128
     });
     var md = forge.md.sha512.create();
     md.update(exampleString, "utf8");
@@ -51,7 +51,7 @@ const demonstrateSignature = () => {
     pss = forge.pss.create({
       md: forge.md.sha512.create(),
       mgf: forge.mgf.mgf1.create(forge.md.sha512.create()),
-      saltLength: 20
+      saltLength: 128
     });
     md = forge.md.sha512.create();
     md.update(exampleString, "utf8");

@@ -7,9 +7,26 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+## [0.2.1] - 2018-11-19
+
+### Changed
+
+- the linter of code
+- some comments
+- changed let declaration to var
+
+### Removed
+
+- object oriented examples
+
+### Security
+
+- addded mfg1 padding
+- made keylenght longer
+
 ## [0.1.1] - 2018-10-22
 
-## Changed
+### Changed
 
 - added "forge" to markdown file names and permalinks
 
