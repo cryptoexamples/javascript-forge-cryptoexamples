@@ -51,7 +51,7 @@ const demonstrateFileEncryption = () => {
     cipher.update(forge.util.createBuffer(input.toString("binary")));
     cipher.finish();
     var tag = cipher.mode.tag;
-    encrypted = forge.util.createBuffer();
+    var encrypted = forge.util.createBuffer();
     encrypted.putBuffer(cipher.output);
     // node buffer and forge buffer differ, so the forge buffer must be converted to a node Buffer
     encrypted = Buffer.from(encrypted.getBytes(), "binary");
