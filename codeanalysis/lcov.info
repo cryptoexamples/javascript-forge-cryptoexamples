@@ -1,5 +1,5 @@
 TN:
-SF:C:\Users\Peter\Documents\Bachelor\javascript-forge-cryptoexamples\src\allinone\ExampleAsymmetricStringEncryption.js
+SF:C:\Users\Peter\Documents\Bachelor\javascript-forge-cryptoexamples\src\ExampleAsymmetricStringEncryption.js
 FN:27,(anonymous_0)
 FNF:1
 FNH:1
@@ -28,7 +28,7 @@ BRF:2
 BRH:1
 end_of_record
 TN:
-SF:C:\Users\Peter\Documents\Bachelor\javascript-forge-cryptoexamples\src\allinone\ExampleFileEncryption.js
+SF:C:\Users\Peter\Documents\Bachelor\javascript-forge-cryptoexamples\src\ExampleFileEncryption.js
 FN:29,(anonymous_0)
 FNF:1
 FNH:1
@@ -77,7 +77,7 @@ BRF:4
 BRH:2
 end_of_record
 TN:
-SF:C:\Users\Peter\Documents\Bachelor\javascript-forge-cryptoexamples\src\allinone\ExampleHash.js
+SF:C:\Users\Peter\Documents\Bachelor\javascript-forge-cryptoexamples\src\ExampleHash.js
 FN:26,(anonymous_0)
 FNF:1
 FNH:1
@@ -105,7 +105,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:C:\Users\Peter\Documents\Bachelor\javascript-forge-cryptoexamples\src\allinone\ExampleSignature.js
+SF:C:\Users\Peter\Documents\Bachelor\javascript-forge-cryptoexamples\src\ExampleSignature.js
 FN:27,(anonymous_0)
 FNF:1
 FNH:1
@@ -136,7 +136,7 @@ BRF:0
 BRH:0
 end_of_record
 TN:
-SF:C:\Users\Peter\Documents\Bachelor\javascript-forge-cryptoexamples\src\allinone\ExampleStringEncryptionKeyBased.js
+SF:C:\Users\Peter\Documents\Bachelor\javascript-forge-cryptoexamples\src\ExampleStringEncryptionKeyBased.js
 FN:26,(anonymous_0)
 FNF:1
 FNH:1
@@ -178,7 +178,7 @@ BRF:4
 BRH:2
 end_of_record
 TN:
-SF:C:\Users\Peter\Documents\Bachelor\javascript-forge-cryptoexamples\src\allinone\ExampleStringEncryptionPasswordBased.js
+SF:C:\Users\Peter\Documents\Bachelor\javascript-forge-cryptoexamples\src\ExampleStringEncryptionPasswordBased.js
 FN:28,(anonymous_0)
 FNF:1
 FNH:1

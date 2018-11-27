@@ -24,20 +24,20 @@ current_reviews: [
 
 ]
 # Indicates when this example was last updated/created. Reviews don't change this.
-last_updated: "2018-10-20"
+last_updated: "2018-11-27"
 tags: [JavaScript, Node.js, node-forge, AES, GCM, Salt, AEAD] 
 ---
 
 ## Use cases
 
 - Usable on server side
-- Usable on Client side, if certain node-forge files are built and served to the Browser. See [node-forge](https://github.com/digitalbazaar/forge")
+- Usable on Client side, if certain node-forge files are built and served to the Browser. See [node-forge](https://github.com/digitalbazaar/forge)
 - Random key generation
 - String encryption
 
 ## node version
 
-- 8.11.2
+- 10.13.0
 
 ## JavaScript Version
 
@@ -45,7 +45,7 @@ tags: [JavaScript, Node.js, node-forge, AES, GCM, Salt, AEAD]
 
 ## Installation
 
-- [node-forge](https://github.com/digitalbazaar/forge")
+- [node-forge](https://github.com/digitalbazaar/forge)
 - [Winston logger](https://github.com/winstonjs/winston)
 
 ## Example Code for JavaScript String Encryption with key generation using AES-GCM

@@ -26,20 +26,20 @@ current_reviews: [
 
 ]
 # Indicates when this example was last updated/created. Reviews don't change this.
-last_updated: "2018-10-20"
+last_updated: "2018-11-27"
 tags: [JavaScript, Node.js, node-forge, AES, GCM, PBKDF2, Salt, AEAD] 
 ---
 
 ## Use cases
 
 - Usable on server side
-- Usable on Client side, if certain node-forge files are built and served to the Browser. See [node-forge](https://github.com/digitalbazaar/forge")
+- Usable on Client side, if certain node-forge files are built and served to the Browser. See [node-forge](https://github.com/digitalbazaar/forge)
 - Password based encryption of a file
 - Previously shared common secret (password)
 
 ## node version
 
-- 8.11.2
+- 10.13.0
 
 ## JavaScript Version
 
@@ -47,7 +47,7 @@ tags: [JavaScript, Node.js, node-forge, AES, GCM, PBKDF2, Salt, AEAD]
 
 ## Installation
 
-- [node-forge](https://github.com/digitalbazaar/forge")
+- [node-forge](https://github.com/digitalbazaar/forge)
 - [Winston logger](https://github.com/winstonjs/winston)
 
 ## Example Code for JavaScript Password based symmetric file encryption using AES-GCM and PBKDF2

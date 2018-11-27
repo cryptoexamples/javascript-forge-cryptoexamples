@@ -44,7 +44,7 @@ const demonstrateFileEncryption = () => {
     var iv = forge.random.getBytesSync(16);
 
     // ENCRYPT the file
-    var input = fs.readFileSync("file.txt");
+    var input = fs.readFileSync("test/testdat/file.txt");
     var cipher = forge.cipher.createCipher("AES-GCM", key);
     cipher.start({ iv: iv });
     // node buffer and forge buffer differ, so the node buffer must be converted to a forge Buffer
@@ -56,7 +56,7 @@ const demonstrateFileEncryption = () => {
     // node buffer and forge buffer differ, so the forge buffer must be converted to a node Buffer
     encrypted = Buffer.from(encrypted.getBytes(), "binary");
     // write encrypted file
-    fs.writeFileSync("file.enc.txt", encrypted);
+    fs.writeFileSync("test/testdat/file.enc.txt", encrypted);
 
     // DECRYPT the file
     var decipher = forge.cipher.createDecipher("AES-GCM", key);
@@ -72,7 +72,7 @@ const demonstrateFileEncryption = () => {
     // node buffer and forge buffer differ, so the forge buffer must be converted to a node Buffer
     decrypted = Buffer.from(decrypted.getBytes(), "binary");
     // write decrypted file
-    fs.writeFileSync("file.dec.txt", decrypted);
+    fs.writeFileSync("test/testdat/file.dec.txt", decrypted);
     logger.info(
       "Decrypted file content and original file content are the same: %s",
       Buffer.compare(input, decrypted) === 0 ? "yes" : "no"
