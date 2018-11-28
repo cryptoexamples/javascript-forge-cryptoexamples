@@ -32,8 +32,7 @@ tags: [JavaScript, Node.js, node-forge, AES, GCM, PBKDF2, Salt, AEAD]
 
 ## Use cases
 
-- Usable on server side
-- Usable on Client side, if certain node-forge files are built and served to the Browser. See [node-forge](https://github.com/digitalbazaar/forge)
+- Usable on server side, not intendend, for use on client side/in Browsers
 - Password based encryption of a file
 - Previously shared common secret (password)
 
