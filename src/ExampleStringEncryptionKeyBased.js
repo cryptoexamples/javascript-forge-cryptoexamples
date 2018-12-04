@@ -46,7 +46,7 @@ const demonstrateKeyBasedSymmetricEncryption = () => {
     cipher.finish();
     var tag = cipher.mode.tag;
     var encrypted = forge.util.encode64(cipher.output.data);
-
+    console.log(encrypted);
     // DECRYPT the text
     var decipher = forge.cipher.createDecipher("AES-GCM", key);
     decipher.start({
